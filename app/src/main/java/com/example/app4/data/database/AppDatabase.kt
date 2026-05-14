@@ -4,11 +4,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.app4.data.model.Post
+import com.example.app4.data.model.PlantSpecimen
+import com.example.app4.data.model.SurveySite
 
-@Database(entities = [Post::class], version = 1, exportSchema = false)
+@Database(
+    entities = [SurveySite::class, PlantSpecimen::class],
+    version = 2,
+    exportSchema = false
+)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun postDao(): PostDao
+    abstract fun floraDao(): FloraDao
 
     companion object {
         @Volatile
@@ -19,8 +24,10 @@ abstract class AppDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "flora_db"
-                ).build()
+                    "flora_collector_db"
+                )
+                    .fallbackToDestructiveMigration() // 如果之前有旧表，直接升级清空
+                    .build()
                 INSTANCE = instance
                 instance
             }

@@ -44,6 +44,7 @@ dependencies {
     // Android 基础 (注意命名：libs.androidx.core.ktx)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.core.ktx)
 
     // 网络
@@ -65,4 +66,10 @@ dependencies {
     testImplementation("org.robolectric:robolectric:4.11.1")
 
     testImplementation(libs.mockito.core)
+
+    // 核心图标库（包含常用的 Add, Back, Edit 等）
+    implementation("androidx.compose.material:material-icons-core")
+
+    // 扩展图标库（如果你以后想要更多花里胡哨的图标，建议也加上这行）
+    implementation("androidx.compose.material:material-icons-extended")
 }
